@@ -1,0 +1,33 @@
+$header-height:  140px;
+html {
+  font-size: 16px;
+  line-height: 1.25;
+}
+.header {
+  height: $header-height;
+
+  &__container {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__home-menu {
+    padding: 0;
+    height: 100%;
+  }
+
+  &__logo{
+    height: $header-height;
+  }
+}
+
+@media (min-width: 1400px) {
+  .header {
+    &__container {
+      max-width: 1376px;
+    }
+  }
+}
