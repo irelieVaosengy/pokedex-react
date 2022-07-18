@@ -20,6 +20,7 @@ $info-font-size: 12px;
   &__container {
     display: flex;
     flex-wrap: wrap;
+    color: $info-color;
   }
 
   &__details {
