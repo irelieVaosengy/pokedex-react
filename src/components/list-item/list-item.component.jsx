@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './list-item.style.scss'
 import {Link} from "react-router-dom";
 
