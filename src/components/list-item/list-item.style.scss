@@ -2,32 +2,48 @@ $image-background: #F2F2F2;
 $type-background: cadetblue;
 $evolution-background: darkseagreen;
 $info-color: #ffffff;
-$item-size: 150px;
+$item-size: 170px;
 $image-width: $item-size - 50;
 $margin: 5px;
 $border-radius: 5px;
-$title-font-size: 16px;
+$title-font-size: 20px;
 $info-font-size: 12px;
+$box-shadow-black: 0 10px 16px 0 rgba(0, 0, 0, 0.20), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+$box-shadow-blue: 0 10px 16px 0 rgba(14, 136, 229, 0.20), 0 6px 20px 0 rgba(14, 136, 229, 0.19);
 
 .list-item {
   opacity: 1;
   transform: matrix(1, 0, 0, 1, 0, 0);
   width: $item-size;
-  height: $item-size;
+  padding: 10px 10px 20px 10px ;
   margin: $margin;
+  background: $image-background;
+  border-radius: $border-radius;
+  box-shadow: $box-shadow-black;
 
-  &__figure {
-    background: $image-background;
-    border-radius: $border-radius;
-    margin: 0 auto;
-  }
-
-  &__figure-link {
+  &__link {
     display: block;
+    color: darkseagreen;
+    text-decoration: none;
+    font-size: $title-font-size;
+
+    :hover {
+      text-decoration: underline;
+    }
   }
 
-  &__figure-link-image{
-    width: $image-width;
+  &__details-label {
+    text-decoration: underline;
+    display: block;
+    margin: 15px 0;
+  }
+
+  &__type-value {
+    background-color: darkseagreen;
+    padding: 5px;
+    margin: 2px;
+    border-radius: 5px;
+    color: dimgrey;
   }
 
   &__info {

@@ -1,6 +1,16 @@
 .pokemons-list{
-  flex-wrap: wrap;
-  display: flex;
-  list-style: none;
-  padding: 10px;
+
+  &__list {
+    flex-wrap: wrap;
+    display: flex;
+    list-style: none;
+    padding: 10px;
+    justify-content: center;
+  }
+
+  &__pagination-btn{
+    margin: 0 20px;
+    height: 40px;
+    width: 100px;
+  }
 }

@@ -1,53 +1,54 @@
-import React, {useEffect} from  'react';
-import {createStructuredSelector} from "reselect";
-import {connect, useDispatch} from "react-redux";
+import React, {useEffect, useState} from 'react';
 import {ListItem} from "../list-item/list-item.component";
-import {selectPokemons} from "../../redux/selectors/pokedex/pokedex.selector";
 import "./pokemons-list-style.scss"
-import {getPokemonsList} from "../../features/pokedex/pokedex.api";
+import {getPokemonsQuery} from "../../features/pokedex/pokedex.api";
+import {useLazyQuery} from "@apollo/client";
 
-const PokemonsList = ({pokedexes = {}}) => {
-    const dispatch = useDispatch()
+export function PokemonsList () {
+    const [page, setPage] = useState(0)
+    const [offset, setOffset] = useState(0)
+    const [getData, { loading, data }] = useLazyQuery(getPokemonsQuery(offset));
+
+    useEffect(() => {
+        getData()
+    }, [])
+
+    useEffect(() => {
+        setOffset(page * 150)
+    }, [page])
+
+    useEffect(() => {
+        getData()
+    }, [offset])
+
+    const pokemons = data?.pokemon_v2_pokemon;
 
     const onPreviewBtnClick = async () => {
-        if(pokedexes.previous) {
-            const paramObject = getQueryParam(pokedexes.previous)
-            await getPokemonsList(dispatch, {offset: paramObject})
+        if(page > 0) {
+            setPage(page - 1)
         }
     }
+
     const onNextBtnClick = async () => {
-        if(pokedexes.next) {
-            const paramObject = getQueryParam(pokedexes.next)
-            await getPokemonsList(dispatch, {offset: paramObject})
-        }
+        setPage(page + 1)
     }
 
-    const getQueryParam = (param) => {
-        const paramString = param?.split('?')[1]
-        const splittedParams = paramString.split('&')
-        const paramOffset = splittedParams[0].split('=')[1]
-
-        return parseInt(paramOffset)
-    }
-
-    return <div>
-        <div>
-            <button type="button" className="btn btn-info btn-primary" onClick={onPreviewBtnClick}>preview</button>
-            <button type="button" className="btn btn-info btn-primary" onClick={onNextBtnClick}>next</button>
+    return <div className="pokemons-list">
+        <div className="pokemons-list__button-container">
+            <button  className="pokemons-list__pagination-btn" onClick={onPreviewBtnClick} disabled={offset == 0}>{`<< preview`}</button>
+            <button  className="pokemons-list__pagination-btn" onClick={onNextBtnClick} disabled={pokemons?.length == 0}>{`preview >>`}</button>
         </div>
-        <ul className="pokemons-list">
-            {pokedexes.results?.map(pokemon => {
-                return  <ListItem key={pokemon.name}
-                                  data={pokemon}
+        {
+            loading ? 'Loading...' : ''
+        }
+        <ul className="pokemons-list__list">
+            { pokemons && pokemons.length > 0 ?
+                pokemons.map(pokemon => {
+                return  <ListItem key={pokemon.id}
+                data={pokemon}
                 />
-            })}
+            }) : <p> No result </p>
+            }
         </ul>
     </div>
-
 }
-
-const mapStateToProps = createStructuredSelector ({
-    pokedexes : selectPokemons
-});
-
-export default connect(mapStateToProps)(PokemonsList) ;

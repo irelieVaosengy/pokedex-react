@@ -6,18 +6,24 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import './index.css';
 import appStore from "./redux/app.store";
+import { ApolloProvider, ApolloClient, InMemoryCache } from "@apollo/client";
 
 const container = document.getElementById('root');
 const root = createRoot(container);
+
+const client = new ApolloClient({
+    uri: "https://beta.pokeapi.co/graphql/v1beta",
+    cache: new InMemoryCache()
+});
 
 root.render(
 
         <BrowserRouter>
             <Routes>
                 <Route path="*" element={
-                    <Provider store={appStore}>
+                    <ApolloProvider client={client}>
                         <App />
-                    </Provider>
+                    </ApolloProvider>
                 }></Route>
             </Routes>
         </BrowserRouter>

@@ -1,22 +1,37 @@
 import React, { useState } from 'react';
 import './list-item.style.scss'
-import pokemonImage from "../../assets/images/002.png"
+import {Link} from "react-router-dom";
 
 export function ListItem({data }) {
+    const types = data.pokemon_v2_pokemontypes;
+
     return (
-        <li className="list-item animating">
-            <figure className="list-item__figure">
-                <a className="list-item__figure-link" href={`/pokedex/name=${data.name}`}>
-                    <img className="list-item__figure-link-image" src={pokemonImage} />
-                </a>
-            </figure>
-            <div className="list-item__info">
+        <div className="list-item">
+            <Link className="list-item__link"
+                  to={{pathname: `/pokemon/${data.id}`}} >
                 <h5 className="list-item__info-title">{data.name}</h5>
-                <div className="list-item__info-abilities">
-                    <span className="list-item__info-type list-item__info-ability--item">Poison</span>
-                    <span className="list-item__info-evolution list-item__info-ability--item">Grass</span>
-                </div>
+            </Link>
+            <div className="list-item__Types">
+                <label className="list-item__details-label">Types and evolutions</label>
+                {
+                    types?.map((type) => {
+                        const typeEntity = type.pokemon_v2_type
+                        const evolutions = typeEntity.pokemonV2PokemonevolutionsByPartyTypeId
+
+                        return <span className="list-item__type-value" key={type.id}>
+                            <span >{typeEntity.name}</span>
+                            {
+                                evolutions?.map(evolution => {
+                                    const gender = evolution.pokemon_v2_gender
+                                    const location = evolution.pokemon_v2_location
+
+                                    return <span className="list-item__evolution-value" key={evolution.id}>{gender?.name} {location?.name}</span>
+                                })
+                            }
+                        </span>
+                    })
+                }
             </div>
-        </li>
+        </div>
     );
 }

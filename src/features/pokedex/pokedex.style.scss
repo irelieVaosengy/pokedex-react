@@ -1,0 +1,94 @@
+$image-background: #F2F2F2;
+$type-background: cadetblue;
+$evolution-background: darkseagreen;
+$info-color: #ffffff;
+$item-size: 400px;
+$image-width: 300px;
+$margin: 5px;
+$border-radius: 5px;
+$title-font-size: 16px;
+$info-font-size: 12px;
+
+.pokemon-fiche {
+  opacity: 1;
+  transform: matrix(1, 0, 0, 1, 0, 0);
+
+  &__title {
+    font-size: 40px;
+  }
+
+  &__container {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  &__details {
+    width: 60%;
+  }
+
+  &__section {
+    width: 100%;
+    margin: 10px 20px;
+    border-radius: $border-radius;
+    background-color: $type-background;
+
+    label {
+      display: block;
+      color: $info-color;
+      font-weight: bold;
+    }
+
+    .pokemon-fiche__section-item{
+      display: inline-block;
+      padding: 5px;
+      margin: 5px;
+    }
+  }
+
+  &__profil {
+    width: 30%;
+  }
+
+  &__profile-image{
+    width: $image-width;
+    height: auto;
+    background: $image-background;
+    border-radius: $border-radius;
+  }
+
+  &__evolution {
+    width: 100%;
+    background-color: dimgrey;
+
+    img {
+      border: 5px solid white;
+      background: transparent;
+      border-radius: 50%;
+      width: 80px;
+      height: 80px;
+    }
+  }
+
+  &__evolution-item{
+    position: relative;
+  }
+
+  &__evolution-container{
+    display: flex;
+    color: $image-background;
+    padding-bottom: 10px;
+
+    .chevron {
+      font-size: 20px;
+      position: absolute;
+      font-weight: bold;
+      top: 30%;
+      right: 0;
+    }
+  }
+
+  &__evolution-item-label {
+    display: inline-block;
+    font-size: $info-font-size;
+  }
+}
