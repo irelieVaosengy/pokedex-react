@@ -5,6 +5,8 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import './index.css';
 import { ApolloProvider, ApolloClient, InMemoryCache } from "@apollo/client";
+import appStore from "./redux/app.store";
+import {Provider} from "react-redux";
 
 const container = document.getElementById('root');
 const root = createRoot(container);
@@ -19,7 +21,9 @@ root.render(
             <Routes>
                 <Route path="*" element={
                     <ApolloProvider client={client}>
-                        <App />
+                        <Provider store={appStore}>
+                            <App />
+                        </Provider>
                     </ApolloProvider>
                 }></Route>
             </Routes>

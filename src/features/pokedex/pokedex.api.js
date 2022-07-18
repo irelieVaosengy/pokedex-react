@@ -1,5 +1,6 @@
 import axios from 'axios'
 import {gql} from "@apollo/client";
+import PokedexTypes from "../../redux/actions/pokedex/pokedex.types";
 
 /*
 Remplacé par query graphQl pour éviter de faire des requetes dans une boucle car le API ne renvois pas de type ny d'évolution
@@ -27,8 +28,13 @@ function getErrorPayload(error){
 }
 */
 
-export const getPokemonById =  (pokemonId) =>{
+export const getPokemonById =  (pokemonId, dispatch) =>{
      return axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`).then(response => {
+         dispatch({
+             type: PokedexTypes.GET_POKEMON_SUCCESS,
+             payload: response?.data,
+         })
+
          return response.data
      });
 }

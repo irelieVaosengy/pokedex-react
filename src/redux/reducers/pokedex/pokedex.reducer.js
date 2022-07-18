@@ -1,16 +1,23 @@
-import PokedexTypes from "../../actions/pokedex/pokedex.types";
+import pokedexTypes from "../../actions/pokedex/pokedex.types";
 
 const initialState = {
-    pokemons : []
+    pokemons : {}
 }
 
 export default (state = initialState , action) => {
     switch (action.type) {
-        case PokedexTypes.GET_POKEMONS_SUCCESS:
-            return {
+        case pokedexTypes.GET_POKEMON_SUCCESS:
+        {
+            const list = {...state.pokemons}
+            list[action.payload.id.toString()] = action.payload
+            const newState = {
                 ...state,
-                pokemons: action.payload
-            };
+                pokemons: list
+            }
+
+            return newState
+        }
+           break;
         default:
             return state;
     }

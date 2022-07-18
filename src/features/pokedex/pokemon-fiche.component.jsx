@@ -2,10 +2,14 @@ import React, {useEffect, useState} from 'react';
 import {Link, useParams} from "react-router-dom";
 import {getPokemonById} from "./pokedex.api";
 import "./pokedex.style.scss"
+import {connect, useDispatch} from "react-redux";
+import {createStructuredSelector} from "reselect";
+import {selectPokemons} from "../../redux/selectors/pokedex/pokedex.selector";
 
-export function PokemonFiche() {
+const  PokemonFiche = ({pokemons}) => {
     let { id } = useParams();
     const [data, setData] = useState({})
+    const dispatch = useDispatch()
 
     const sprites = data.sprites
     const profileImage = sprites?.other?.home
@@ -15,9 +19,13 @@ export function PokemonFiche() {
     const versions = sprites?.versions
 
     useEffect(() => {
-        getPokemonById(id).then((response) => {
-            setData(response)
-        })
+        if(pokemons[id]) {
+            setData(pokemons[id])
+        } else {
+            getPokemonById(id, dispatch).then((response) => {
+                setData(response)
+            })
+        }
     }, [])
 
     const createSection = ({list = [], objectKey = '', label=''}) => {
@@ -90,3 +98,9 @@ export function PokemonFiche() {
         </div>
     );
 }
+
+const mapStateToProps = createStructuredSelector ({
+    pokemons : selectPokemons
+});
+
+export default connect(mapStateToProps)(PokemonFiche) ;
