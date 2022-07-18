@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {useParams} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import {getPokemonById} from "./pokedex.api";
 import "./pokedex.style.scss"
 
@@ -56,19 +56,22 @@ export function PokemonFiche() {
 
     return (
         <div className="pokemon-fiche">
+            <Link className="pokemon-fiche__link-back-to-list" to={{pathname: `/`}} >{`<< Back to list`}</Link>
             <h3 className="pokemon-fiche__title">{data.name} #{data.id}</h3>
             <div className="pokemon-fiche__container">
-                <section className="pokemon-fiche__profil">
-                    <img className="pokemon-fiche__profile-image" src={profileImage?.front_default}/>
-                </section>
-                <div className="pokemon-fiche__details">
-                    {createSection({list: abilities, objectKey: 'ability', label: 'abilities'})}
-                    {createSection({list: gameIndices, objectKey: 'version', label: 'Game indices'})}
-                    {createSection({list: types, objectKey: 'type', label: 'Types'})}
-                    <section className="pokemon-fiche__section pokemon-fiche__weight">
-                        <label>weight</label> {data.weight}
+                <section className="pokemon-fiche__profil-container">
+                    <section className="pokemon-fiche__profil">
+                        <img className="pokemon-fiche__profile-image" src={profileImage?.front_default}/>
                     </section>
-                </div>
+                    <div className="pokemon-fiche__details">
+                        {createSection({list: abilities, objectKey: 'ability', label: 'abilities'})}
+                        {createSection({list: gameIndices, objectKey: 'version', label: 'Game indices'})}
+                        {createSection({list: types, objectKey: 'type', label: 'Types'})}
+                        <section className="pokemon-fiche__section pokemon-fiche__weight">
+                            <label>weight</label> {data.weight}
+                        </section>
+                    </div>
+                </section>
                 <section className="pokemon-fiche__section pokemon-fiche__evolution">
                     <label>Evolutions</label>
                     <div className="pokemon-fiche__evolution-container">

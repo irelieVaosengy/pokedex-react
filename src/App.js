@@ -1,7 +1,7 @@
 import React from 'react';
 import {Routes, Route} from 'react-router-dom';
 import { Container } from 'reactstrap';
-import './App.css';
+import './App.scss';
 import {PokedexPage} from "./features/pokedex/pokedex.component";
 import Header from "./components/header/header.component";
 import {PokemonFiche} from "./features/pokedex/pokemon-fiche.component";
