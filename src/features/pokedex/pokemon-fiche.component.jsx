@@ -16,7 +16,6 @@ export function PokemonFiche() {
 
     useEffect(() => {
         getPokemonById(id).then((response) => {
-            console.log('response', response)
             setData(response)
         })
     }, [])
