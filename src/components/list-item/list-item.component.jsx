@@ -25,7 +25,7 @@ export function ListItem({data }) {
                                     const gender = evolution.pokemon_v2_gender
                                     const location = evolution.pokemon_v2_location
 
-                                    return <span className="list-item__evolution-value" key={evolution.id}>{gender?.name} {location?.name}</span>
+                                    return <span className="list-item__evolution-value" key={evolution.id}>{gender?.name} - {location?.name}</span>
                                 })
                             }
                         </span>

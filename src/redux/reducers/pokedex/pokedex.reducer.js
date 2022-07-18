@@ -1,6 +1,5 @@
 import PokedexTypes from "../../actions/pokedex/pokedex.types";
 
-
 const initialState = {
     pokemons : []
 }

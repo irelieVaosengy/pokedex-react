@@ -1,11 +1,9 @@
 import React from 'react';
 import {Routes, Route, BrowserRouter} from 'react-router-dom';
 import { createRoot } from 'react-dom/client';
-import { Provider } from 'react-redux';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import './index.css';
-import appStore from "./redux/app.store";
 import { ApolloProvider, ApolloClient, InMemoryCache } from "@apollo/client";
 
 const container = document.getElementById('root');
@@ -17,7 +15,6 @@ const client = new ApolloClient({
 });
 
 root.render(
-
         <BrowserRouter>
             <Routes>
                 <Route path="*" element={
