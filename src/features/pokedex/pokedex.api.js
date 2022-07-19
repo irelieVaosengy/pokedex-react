@@ -39,9 +39,9 @@ export const getPokemonById =  (pokemonId, dispatch) =>{
      });
 }
 
-export function getPokemonsQuery(offset = 0) {
+export function getPokemonsQuery(pagination = {perPage: 150, offset: 0}) {
     return gql(`{
-        pokemon_v2_pokemon(limit: 150, offset: ${offset}) {
+        pokemon_v2_pokemon(limit: ${pagination.perPage}, offset: ${pagination.offset}) {
             name
             id
             pokemon_v2_pokemontypes {
@@ -67,6 +67,11 @@ export function getPokemonsQuery(offset = 0) {
               sprites
             }
         }
+        pokemon_v2_pokemon_aggregate {
+            aggregate {
+              count
+            }
+          }
       }
     `)
 }

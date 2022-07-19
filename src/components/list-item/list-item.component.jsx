@@ -8,30 +8,31 @@ export function ListItem({data }) {
     return (
         <div className="list-item">
             <Link className="list-item__link"
-                  to={{pathname: `/pokemon/${data.id}`}} >
+                  to={{pathname: `/pokemon/${data.id}`}} title="click to show details">
                 <h5 className="list-item__info-title">{data.name}</h5>
+
+                <div className="list-item__Types">
+                    <label className="list-item__details-label">Types and evolutions</label>
+                    {
+                        types?.map((type) => {
+                            const typeEntity = type.pokemon_v2_type
+                            const evolutions = typeEntity.pokemonV2PokemonevolutionsByPartyTypeId
+
+                            return <span className="list-item__type-value" key={type.id}>
+                                <span >{typeEntity.name}</span>
+                                {
+                                    evolutions?.map(evolution => {
+                                        const gender = evolution.pokemon_v2_gender
+                                        const location = evolution.pokemon_v2_location
+
+                                        return <span className="list-item__evolution-value" key={evolution.id}>{gender?.name} - {location?.name}</span>
+                                    })
+                                }
+                            </span>
+                        })
+                    }
+                </div>
             </Link>
-            <div className="list-item__Types">
-                <label className="list-item__details-label">Types and evolutions</label>
-                {
-                    types?.map((type) => {
-                        const typeEntity = type.pokemon_v2_type
-                        const evolutions = typeEntity.pokemonV2PokemonevolutionsByPartyTypeId
-
-                        return <span className="list-item__type-value" key={type.id}>
-                            <span >{typeEntity.name}</span>
-                            {
-                                evolutions?.map(evolution => {
-                                    const gender = evolution.pokemon_v2_gender
-                                    const location = evolution.pokemon_v2_location
-
-                                    return <span className="list-item__evolution-value" key={evolution.id}>{gender?.name} - {location?.name}</span>
-                                })
-                            }
-                        </span>
-                    })
-                }
-            </div>
         </div>
     );
 }
