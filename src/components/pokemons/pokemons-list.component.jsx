@@ -25,7 +25,6 @@ export function PokemonsList () {
         getData()
     }, [pagination.offset])
 
-    console.log('data', data)
     const pokemons = data?.pokemon_v2_pokemon;
     const pokemonsTotalCount = data?.pokemon_v2_pokemon_aggregate?.aggregate?.count;
     const pageCount = pokemonsTotalCount / pagination.perPage;
@@ -42,7 +41,7 @@ export function PokemonsList () {
 
     return <div className="pokemons-list">
         <div className="pokemons-list__button-container">
-            <button  className="pokemons-list__pagination-btn" onClick={onPreviewBtnClick} disabled={pagination.offset === 0}>{`<< preview`}</button>
+            <button  className="pokemons-list__pagination-btn" onClick={onPreviewBtnClick} disabled={pagination.page === 1}>{`<< preview`}</button>
             <button  className="pokemons-list__pagination-btn" onClick={onNextBtnClick} disabled={pagination.page >= pageCount}>{`preview >>`}</button>
         </div>
         {
