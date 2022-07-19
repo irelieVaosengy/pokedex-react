@@ -39,11 +39,21 @@ export function PokemonsList () {
         setPagination({...pagination, page: pagination.page + 1})
     }
 
+    const goToPage = (event) => {
+        setPagination({...pagination, page: parseInt(event.target.value)})
+    }
+
+    const createPaginationElement = ()=> {
+        let buttons = []
+
+        for(let index = 0 ; index < pageCount; index++) {
+            buttons.push(<button key={index} value={index+1} className="pokemons-list__pagination-btn pokemons-list__pagination-btn--num" onClick={goToPage} disabled={pagination.page === index + 1}>{index + 1}</button>)
+        }
+
+        return buttons
+    }
+
     return <div className="pokemons-list">
-        <div className="pokemons-list__button-container">
-            <button  className="pokemons-list__pagination-btn" onClick={onPreviewBtnClick} disabled={pagination.page === 1}>{`<< preview`}</button>
-            <button  className="pokemons-list__pagination-btn" onClick={onNextBtnClick} disabled={pagination.page >= pageCount}>{`preview >>`}</button>
-        </div>
         {
             loading ? 'Loading...' : ''
         }
@@ -56,5 +66,10 @@ export function PokemonsList () {
             }) : <p> No result </p>
             }
         </ul>
+        <div className="pokemons-list__button-container">
+            <button  className="pokemons-list__pagination-btn" onClick={onPreviewBtnClick} disabled={pagination.page === 1}>{`<< preview`}</button>
+            <span>{createPaginationElement()}</span>
+            <button  className="pokemons-list__pagination-btn" onClick={onNextBtnClick} disabled={pagination.page >= pageCount}>{`preview >>`}</button>
+        </div>
     </div>
 }
