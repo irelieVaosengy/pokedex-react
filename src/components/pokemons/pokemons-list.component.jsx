@@ -6,7 +6,7 @@ import {useLazyQuery} from "@apollo/client";
 
 export function PokemonsList () {
     const defaultPagination = {
-        perPage: 150,
+        perPage: 30,
         offset: 0,
         page: 1
     }

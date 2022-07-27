@@ -5,6 +5,7 @@ import './App.scss';
 import {PokedexPage} from "./features/pokedex/pokedex.component";
 import Header from "./components/header/header.component";
 import PokemonFiche from "./features/pokedex/pokemon-fiche.component";
+import Footer from "./components/footer/footer.component";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
             <Route path="/pokemon/:id" element={ <PokemonFiche /> }></Route>
         </Routes>
     </Container>
+        <Footer/>
     </div>
   );
 }

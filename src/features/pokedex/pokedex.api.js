@@ -39,7 +39,7 @@ export const getPokemonById =  (pokemonId, dispatch) =>{
      });
 }
 
-export function getPokemonsQuery(pagination = {perPage: 150, offset: 0}) {
+export function getPokemonsQuery(pagination = {perPage: 50, offset: 0}) {
     return gql(`{
         pokemon_v2_pokemon(limit: ${pagination.perPage}, offset: ${pagination.offset}) {
             name
